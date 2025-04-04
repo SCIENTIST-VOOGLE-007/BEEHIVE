@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐝 Beehive - Predict Financial Health</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Icons -->
+</head>
+<body>
+    <div class="hero-section">
+        <h1>🐝 Welcome to Beehive</h1>
+        <h2>Honeycomb Your Data, Protect Your Hive</h2>
+        <p>Unlock AI-powered financial insights and secure your company's future.<br>
+           Our advanced model helps you predict bankruptcy risks with ease.</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-folder-open"></i> Upload Your Financial Data</h2>
+        <p>Analyze a complete company portfolio. Upload a <strong>CSV file</strong>, and our AI will predict bankruptcy risk.</p>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit"><i class="fas fa-search"></i> Predict from CSV</button>
+        </form>
+
+        <hr>
+
+        <h2 class="section-title"><i class="fas fa-edit"></i> Quick Manual Entry</h2>
+        <p>Enter financial data manually for a <strong>quick risk assessment.</strong></p>
+        <form action="/manual" method="post">
+            <div class="form-group">
+                <label><i class="fas fa-coins"></i> Total Assets (in USD):</label>
+                <input type="number" step="0.01" name="feature1" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-balance-scale"></i> Total Liabilities (in USD):</label>
+                <input type="number" step="0.01" name="feature2" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-chart-line"></i> Revenue (in USD):</label>
+                <input type="number" step="0.01" name="feature3" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-percentage"></i> Net Profit Margin (%):</label>
+                <input type="number" step="0.01" name="feature4" required>
+            </div>
+            <button type="submit"><i class="fas fa-calculator"></i> Predict Bankruptcy</button>
+        </form>
+
+        <div class="info-section">
+            <h2>🔍 How It Works</h2>
+            <p>Beehive leverages <strong>AI-powered analysis</strong> to detect bankruptcy risks in real time.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> <strong>Data Analysis</strong> - Evaluates key financial indicators</li>
+                <li><i class="fas fa-robot"></i> <strong>AI Predictions</strong> - Uses machine learning for high accuracy</li>
+                <li><i class="fas fa-bolt"></i> <strong>Instant Insights</strong> - Get predictions within seconds</li>
+            </ul>
+        </div>
+
+        <div class="export-section">
+            <h2>📊 Download Past Predictions</h2>
+            <a href="/export" class="btn"><i class="fas fa-file-download"></i> Download Prediction History</a>
+        </div>
+    </div>
+</body>
+</html>

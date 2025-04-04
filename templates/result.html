@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐝 Beehive - Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Icons -->
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Beehive - Prediction Result</h1>
+        <p>Your company’s financial health report is ready.</p>
+
+        <div class="result-box">
+            <h2>Prediction: <span class="result">{{ result }}</span></h2>
+            <p>🛡️ <strong>Risk Level:</strong> <span class="{{ risk_level | lower }}">{{ risk_level }}</span></p>
+            <p>📈 <strong>Probability of Bankruptcy:</strong> <span>{{ probability }}%</span></p>
+        </div>
+
+        <div class="explanation-section">
+            <h2>📝 What This Means</h2>
+            <p>If your company is classified as <strong>"High Risk"</strong>, consider reviewing its financial structure.<br>
+               A <strong>medium or low risk</strong> score suggests stability, but continuous monitoring is advised.</p>
+        </div>
+
+        <div class="insights">
+            <h2>🔍 Key Factors Affecting Your Score</h2>
+            <ul>
+                {% for factor in top_factors %}
+                    <li><strong>{{ factor.Feature }}</strong>: {{ factor.Importance | round(3) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- 📊 Industry Analysis Section (Only if Data Exists) -->
+        {% if industry_comparison %}
+        <div class="industry-analysis">
+            <h2>📊 Industry Financial Analysis</h2>
+            <p>How does your company compare to the industry?</p>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Industry Average</th>
+                </tr>
+                {% for metric, values in industry_comparison.items() %}
+                <tr>
+                    <td>{{ metric }}</td>
+                    <td>{{ values['mean'] | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <p class="no-data">⚠️ No industry comparison data available.</p>
+        {% endif %}
+
+        <!-- 💰 High-Risk Company Trends (Only if Data Exists) -->
+        {% if high_risk_trends %}
+        <div class="high-risk-trends">
+            <h2>💰 High-Risk Financial Trends</h2>
+            <p>Key financial insights for companies classified as high-risk.</p>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Mean</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                </tr>
+                {% for metric, values in high_risk_trends.items() %}
+                <tr>
+                    <td>{{ metric }}</td>
+                    <td>{{ values['mean'] | round(2) }}</td>
+                    <td>{{ values['min'] | round(2) }}</td>
+                    <td>{{ values['max'] | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <p class="no-data">⚠️ No high-risk financial trends available.</p>
+        {% endif %}
+
+
+        <a href="/" class="btn"><i class="fas fa-redo"></i> Predict Again</a>
+    </div>
+</body>
+</html>
