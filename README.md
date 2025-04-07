@@ -36,8 +36,6 @@ pip install -r requirements.txt
 Run the Flask server:
 
 ```bash
-Copy
-Edit
 python app.py
 ```
 Upload company financial data (CSV format).
